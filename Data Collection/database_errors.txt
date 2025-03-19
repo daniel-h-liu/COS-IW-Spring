@@ -63,10 +63,13 @@ PERSONAL  NOTES:
         ]
     }
 - Dates of concerts are in ISO8601? But giving wrong time (AM instead of PM)
-- Wrong entry of Carl Maria von Weber, sometimes Carl Maria Von Weber
-    - Now merged together through OpenRefine
-- Sometimes Matos Rodriguez, Gerardo, othertimes Rodriguez, Gerardo Matos
-    - Now merged together through OpenRefine
+- Composer name
+    - Wrong entry of Carl Maria von Weber, sometimes Carl Maria Von Weber
+        - Now merged together through OpenRefine
+    - Sometimes Matos Rodriguez, Gerardo, othertimes Rodriguez, Gerardo Matos
+        - Now merged together through OpenRefine
+    - WHO IS ACT,?? appears once in Michael Tilson Thomas concert. Is it 
+        act of an opera? But it isn't an opera concert...
 - Many pieces' names incorrect
     - SYMPHONY NO. 3 vs. SYMPHONY NO.  3
     - PIANO SONATA, OP. 1 vs. SONATA, PIANO, OP. 1
@@ -76,3 +79,18 @@ PERSONAL  NOTES:
 - Things like String Quartet are assumed to be 2 Violin, Cello, and Viola
     while Trios and other arrangements are specified TRIO, INSTRUMENT1,
     INSTRUMENT2, etc.
+- Concert location
+    - Spartanburg, NC is not real. Spartanburg, SC is.
+- Conductor
+    - Alberto Sciarretti incorrectly listed as Alberto Sciaretti
+    - Random semicolons in front of conductor names at times
+    - Where there are multiple conductors, they are split by semicolon,
+        must account for this while coding and counting. Conductors
+        should be kept as a list then.
+    - Some are not conducted, especially chamber-esque pieces. However
+        sometimes it says "Not conducted", and other times it is blank.
+        Not possible to change all to not conducted (would change all
+        the rows in OpenRefine, even ones not associated with pieces).
+        Will have to handle in code (change to "Not conducted" if blank)
+- Ran text facets on pieces, composers, location, venue, eventType, 
+    conductor 

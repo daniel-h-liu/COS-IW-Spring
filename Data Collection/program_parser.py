@@ -17,7 +17,7 @@ with open("complete.json") as file:
             w = Work(work.get("ID", "unknown_id"), 
                      work.get("composerName", "unknown_composer"), 
                      work.get("workTitle", "unknown_title"), 
-                     work.get("conductorName", "unknown_conductor"), 
+                     work.get("conductorName", "Not conducted"), 
                      work.get("soloists", []))
             works.append(w)
 
