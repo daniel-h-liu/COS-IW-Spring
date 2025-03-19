@@ -1,0 +1,78 @@
+========================================================================
+| Database Error Log                                                   |
+| by Daniel Liu                                                        |
+|                                                                      |
+| Last revision: 2/27/2024                                             |
+========================================================================
+
+INCLUDED ON WEBSITE:
+- A program is defined as one or more performances or presentations in 
+which the same repertoire, conductors, and soloists are EXACTLY the same
+(dates, times, locations may vary within). For example, if a soloist 
+plays an encore one night but not another, the concert with the encore 
+becomes a different program.
+- Movements are now included as cataloged by NYP. Keep in mind that we 
+do not necessarily catalog every movement in the work, only movements 
+that we have ever performed.
+- To see detailed information about our internal descriptive standards, 
+please go to 
+http://archives.nyphil.org/index.php/help-performancehistory.
+
+
+PERSONAL  NOTES: 
+- INTERMISSION is listed as a work in every concert, with id 0*,
+    interval "INTERMISSION", and no composerName, noWorkTitle,
+    conductorName, and an empty list of soloists
+- It seems sometimes works are included separately by movements, and
+    other times together as one piece. This would result in HUGE
+    discrepancies in trends if true.
+    - The * after the work id seems to refer to the movement number.
+- Sometimes a worktitle is not a single string but a whole dictionary??
+    - First "_" refers to usually the specific movement name, with any
+        arrangers listed.
+    - "em" is where the movement is from. But why different system than
+        just having the "movement" feature like other works do? Maybe
+        because this is a specific movement arranged from a piece--
+        the entire piece is not arranged by the group and then one
+        movement is selected from that larger work.
+    - https://archives.nyphil.org/index.php/artifact/e0228764-1e1a-452c-a95b-3ac4db6a2d09-0.1?search-type=singleFilter&search-text=*&search-dates-from=03%2F02%2F1937&search-dates-to=03%2F03%2F1937
+    {
+        "ID": "12940*",
+        "composerName": "Bach,  Johann  Sebastian",
+        "workTitle": {
+            "_": "AIR FROM  (ARR. CLARINET ENS.) (ARR. Bellison)",
+            "em": "SUITE IN D MAJOR"
+        },
+        "conductorName": "Bellison, Simeon",
+        "soloists": []
+    },
+    {
+        "ID": "12941*",
+        "composerName": "Haydn,  Franz  Joseph",
+        "workTitle": {
+            "_": "ANDANTE FROM  (ARR. CLARINET ENS.) (ARR. Bellison)",
+            "em": "SURPRISE SYMPHONY"
+        },
+        "conductorName": "Bellison, Simeon",
+        "soloists": [
+        {
+            "soloistName": "Clarinet Ensemble of NYP",
+            "soloistInstrument": "Ensemble",
+            "soloistRoles": "None"
+        }
+        ]
+    }
+- Dates of concerts are in ISO8601? But giving wrong time (AM instead of PM)
+- Wrong entry of Carl Maria von Weber, sometimes Carl Maria Von Weber
+    - Now merged together through OpenRefine
+- Sometimes Matos Rodriguez, Gerardo, othertimes Rodriguez, Gerardo Matos
+    - Now merged together through OpenRefine
+- Many pieces' names incorrect
+    - SYMPHONY NO. 3 vs. SYMPHONY NO.  3
+    - PIANO SONATA, OP. 1 vs. SONATA, PIANO, OP. 1
+- There are SONGS (UNSPECIFIED) and WORKS (UNSPECIFIED)...
+    - Leaving them there for now. Fixed issue of placement of parantheses
+        in OpenRefine.
+- Things like String Quartet are assumed to be 2 Violin, Cello, and Viola
+    while Trios and other arrangements are specified TRIO, INSTRUMENT1,
+    INSTRUMENT2, etc.
