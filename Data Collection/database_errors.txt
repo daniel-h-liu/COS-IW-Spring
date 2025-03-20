@@ -70,6 +70,9 @@ PERSONAL  NOTES:
         - Now merged together through OpenRefine
     - WHO IS ACT,?? appears once in Michael Tilson Thomas concert. Is it 
         act of an opera? But it isn't an opera concert...
+    - Unknown vs. Unspecified. I am making the decision that semantically,
+        it is not that crucial of a difference so I will change them 
+        all to be "Unknown,". *This is not the same as blank.*
 - Many pieces' names incorrect
     - SYMPHONY NO. 3 vs. SYMPHONY NO.  3
     - PIANO SONATA, OP. 1 vs. SONATA, PIANO, OP. 1
@@ -79,6 +82,9 @@ PERSONAL  NOTES:
 - Things like String Quartet are assumed to be 2 Violin, Cello, and Viola
     while Trios and other arrangements are specified TRIO, INSTRUMENT1,
     INSTRUMENT2, etc.
+- concerts is a list: are there times when there are multiple concerts
+    that are stored under the same programID? How does this effect 
+    counting the concerts--keep it 1, or multiply it by len(concerts)?
 - Concert location
     - Spartanburg, NC is not real. Spartanburg, SC is.
 - Conductor
@@ -86,7 +92,8 @@ PERSONAL  NOTES:
     - Random semicolons in front of conductor names at times
     - Where there are multiple conductors, they are split by semicolon,
         must account for this while coding and counting. Conductors
-        should be kept as a list then.
+        should be kept as a list then. Won't be the easiest to retrieve,
+        but possible and not the most critical information anyways.
     - Some are not conducted, especially chamber-esque pieces. However
         sometimes it says "Not conducted", and other times it is blank.
         Not possible to change all to not conducted (would change all
@@ -94,3 +101,6 @@ PERSONAL  NOTES:
         Will have to handle in code (change to "Not conducted" if blank)
 - Ran text facets on pieces, composers, location, venue, eventType, 
     conductor 
+- TODO: Currently, wagner and dis meistersinger, tannhauser, etc. are all
+    at the top of the count. Most likely, these are being overcounted 
+    due to separate movements. VERIFY, AND TRY TO FIX!!

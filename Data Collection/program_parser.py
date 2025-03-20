@@ -1,5 +1,7 @@
 import json
+import pandas as pd
 from Classes import Concert, Work
+from common import *
 
 concerts = []
 works = []
@@ -9,37 +11,26 @@ works = []
 with open("complete.json") as file:
     programs = json.load(file)["programs"]
 
+    #normalized_programs_df = pd.json_normalize(programs)
+    #print(list(normalized_programs_df))
+
     for concert in programs:
-        c = Concert(concert["id"], concert["season"], concert["concerts"][0], concert["works"])
+        c = Concert(concert["id"], concert["programID"], concert["orchestra"], concert["season"], concert["concerts"], concert["works"])
         concerts.append(c)
 
         for work in concert["works"]:         
             w = Work(work.get("ID", "unknown_id"), 
-                     work.get("composerName", "unknown_composer"), 
-                     work.get("workTitle", "unknown_title"), 
+                     work.get("composerName", "Unknown,"), 
+                     work.get("workTitle", "unknown_title"),
+                     work.get("movement", ""),
                      work.get("conductorName", "Not conducted"), 
                      work.get("soloists", []))
             works.append(w)
 
+# Convert to Pandas Dataframe
+concerts_df = pd.DataFrame([vars(c) for c in concerts])
+works_df = pd.DataFrame([vars(w) for w in works])
 
-# Count frequency of composers
-composer_freq = {}
-for work in works:
-    composer_freq[work.composer] = composer_freq.get(work.composer, 0) + 1
-
-print({k: v for k, v in sorted(composer_freq.items(), key=lambda item: item[1])})
-
-# Count frequency of works
-work_freq = {}
-for work in works:
-    try: 
-        work_freq[work.title] = work_freq.get(work.title, 0) + 1
-    except:
-        print("Error hashing title: " + str(work.title))
-    
-
-#print({k: v for k, v in sorted(work_freq.items(), key=lambda item: item[1])})
-
-print("Total # of concerts: " + str(len(concerts)))
-print("Total # of works: " + str(len(works)))
-print("Avg # of works per concert: " + str((len(works) / len(concerts))))
+concerts_df.to_pickle(DF_FILE_LOC + "concerts.pkl")
+works_df.to_pickle(DF_FILE_LOC + "works.pkl")
+print("Concerts + works parsed and saved to pickles.")
