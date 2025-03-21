@@ -18,8 +18,9 @@ class Concert:
     #     }
 
 class Work:
-    def __init__(self, id, composer, title, movement, conductor, soloists):
+    def __init__(self, id, programID, composer, title, movement, conductor, soloists):
         self.id = id
+        self.programID = programID
         self.composer = composer
         self.title = title
         self.movement = movement

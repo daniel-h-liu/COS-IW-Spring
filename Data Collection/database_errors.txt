@@ -104,3 +104,9 @@ PERSONAL  NOTES:
 - TODO: Currently, wagner and dis meistersinger, tannhauser, etc. are all
     at the top of the count. Most likely, these are being overcounted 
     due to separate movements. VERIFY, AND TRY TO FIX!!
+    FIX: Only count composer once per concert. Beethoven now on top!
+    Wagner operas are still top though. Are they performed that much
+    or is there something else going on? (Listed every night/every movement
+    ...but counting only once per concert should fix the movement issue)
+    The prelude to act I is a really popular choice. But also other singular
+    movements in concerts... is it fair to count all of them under
