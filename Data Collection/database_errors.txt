@@ -110,3 +110,334 @@ PERSONAL  NOTES:
     ...but counting only once per concert should fix the movement issue)
     The prelude to act I is a really popular choice. But also other singular
     movements in concerts... is it fair to count all of them under
+- "LA/LE/THE" at the start of piece names is added on at end, after a comma
+- Piece names are ordered "*type of piece, *instrumentation, *opus number"
+    - For pieces that have it as part of the name, I kept the original order
+    ex: "Three Minute Cello Concerto" stays the same instead of becoming 
+        "Three Minute Concerto, Cello"
+
+
+
+Edits to complete.json:
+
+IN CODE:
+- need to get rid of double spaces, do a simple replace("  ", " ") - at least in composerName and piece names
+- conductorName can be a list of conductors separated by semicolons, store as such
+- consider Unknown and Unspecified the same when counting?
+
+1. "from": [
+          "Weber,  Carl  Maria von",
+          "Weber,  Carl  Maria Von"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "Weber,  Carl  Maria von"
+
+2. "from": [
+          "Matos Rodríguez,  Gerardo",
+          "Rodriguez,  Gerardo  Matos"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "Matos Rodríguez,  Gerardo"
+
+3. "from": [
+          "SYMPHONY NO. 3",
+          "SYMPHONY NO.  3"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "SYMPHONY NO. 3"
+
+4. "from": [
+          "PIANO SONATA, OP. 1",
+          "SONATA, PIANO, OP. 1"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "SONATA, PIANO, OP. 1"
+
+5. "from": [
+          "QUARTET, STRING, NO. 1",
+          "STRING QUARTET NO. 1"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "QUARTET, STRING, NO. 1"
+
+6. "from": [
+          "MORENA DE MI COPLA, LA",
+          "LA MORENA DE MI COPLA"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "MORENA DE MI COPLA, LA"
+
+7. "from": [
+          "SYMPHONY NO. 8",
+          "SYMPHONY NO.  8"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "SYMPHONY NO. 8"
+
+8. "from": [
+          "CUMPARSITA, LA",
+          "LA CUMPARSITA"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "CUMPARSITA, LA"
+
+9. "from": [
+          "SEMIRAMIS",
+          "SÉMIRAMIS"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "SÉMIRAMIS"
+
+10. "from": [
+          "STAR, THE",
+          "THE STAR"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "STAR, THE"
+    (* the single piece named THE STAR, not in the other cases *)
+
+11. "from": [
+          "SONGS (UNSPECIFIED)",
+          "SONGS: (UNSPECIFIED)"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "SONGS (UNSPECIFIED)"
+
+12. "from": [
+          "WORK (UNSPECIFIED)",
+          "WORK UNSPECIFIED"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "WORK (UNSPECIFIED)"
+
+13. "from": [
+          "SONG OF THE VOLGA BOATMEN, THE",
+          "SONG OF THE VOLGA BOATMEN"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "SONG OF THE VOLGA BOATMEN, THE"
+
+14. "from": [
+          "SYMPHONY NO. 4",
+          "SYMPHONY NO.  4"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "SYMPHONY NO. 4"
+
+all symphony no.  # are replaced to only have one space
+
+15. "from": [
+          "FOUR SONGS",
+          "SONGS, FOUR"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "SONGS, FOUR"
+
+16. "from": [
+          "FOLK SONGS (UNSPECIFIED)",
+          "UNSPECIFIED FOLK SONGS"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "FOLK SONGS (UNSPECIFIED)"
+
+17. "from": [
+          "QUARTET, STRING, NO. 2",
+          "STRING QUARTET NO. 2"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "QUARTET, STRING, NO. 2"
+
+18. "from": [
+          "CONCERTO, CELLO",
+          "CELLO CONCERTO"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "CONCERTO, CELLO"
+
+19. "from": [
+          "LA VIERGE A LA CRECHE",
+          "VIERGE A LA CRECHE, LA"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "VIERGE A LA CRECHE, LA"
+
+20. "from": [
+          "CONCERTO, VIOLIN",
+          "VIOLIN CONCERTO"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "CONCERTO, VIOLIN"
+
+21. "from": [
+          "SERENADE (UNSPECIFIED)",
+          "SERENADE [UNSPECIFIED]"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "SERENADE (UNSPECIFIED)"
+
+22. "from": [
+          "RUSSIAN SOLDIERS SONG",
+          "RUSSIAN SOLDIER'S SONG"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "RUSSIAN SOLDIER'S SONG"
+
+23. "from": [
+          "PIANO SONATA NO.  ",
+          "PIANO SONATA NO. "
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "SONATA, PIANO NO. "
+
+reversed order of all sonatas so they were in "sonata, instrument" form
+if an instrument was present in the title
+
+24. "from": [
+          "CONCERTO, TWO PIANOS",
+          "CONCERTO, PIANOS, TWO"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "CONCERTO, TWO PIANOS"
+
+25. "from": [
+          "MEDLEY (UNSPECIFIED)",
+          "MEDLEY [UNSPECIFIED]"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "MEDLEY (UNSPECIFIED)"
+
+26. "from": [
+          "ARIA (UNSPECIFIED)",
+          "ARIA [UNSPECIFIED]"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "ARIA (UNSPECIFIED)"
+
+27. "from": [
+          "SONG (UNSPECIFIED)",
+          "SONG, UNSPECIFIED"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "SONG (UNSPECIFIED)"
+
+28. "from": [
+          "QUARTET, STRING",
+          "STRING QUARTET"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "QUARTET, STRING"
+
+29. "from": [
+          "WALTZ (UNSPECIFIED)",
+          "UNSPECIFIED WALTZ"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "WALTZ (UNSPECIFIED)"
+
+30. "from": [
+          "CONCERTO, PIANO",
+          "PIANO CONCERTO"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "CONCERTO, PIANO"
+
+also "PIANO CONCERTO, SECOND" to "CONCERTO NO. 2, PIANO"
+
+31. "from": [
+          "SERENADE",
+          "SÉRÉNADE"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "SERENADE"
+
+    not gounods, just brahm's serenade inutile
+
+32. "from": [
+          "Spartanburg, SC",
+          "Spartanburg, NC"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "Spartanburg, SC"
+
+33. "from": [
+          "Hotel Plaza",
+          "Plaza Hotel"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "Plaza Hotel"
+
+34. "from": [
+          "de Waart, Edo",
+          "de Waart, Edo;  ;  ;  de Waart, Edo"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "de Waart, Edo"
+
+35. "from": [
+          "Smallens, Alexander;  Sciaretti, Alberto",
+          "Smallens, Alexander;  Sciarretti, Alberto"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "Smallens, Alexander; Sciarretti, Alberto"
+
+36. "from": [
+          ";  Chan, Elim"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "Chan, Elim"
+
+37. "from": [
+          ";  Not conducted"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "Not conducted"
+
+other than "Rudel, Julius;  Not conducted", perhaps important info
+-> will have to parse conductor names as a list separated by semicolons
+
+DID NOT IMPLEMENT THIS ONE. On second thought, the difference between
+Unkown and Unspecified may be important to keep. That might mess up 
+counting if they are not counted as the same, but that's a coding problem.
+38. "from": [
+          "Unspecified,"
+        ],
+    "fromBlank": false,
+    "fromError": false,
+    "to": "Unknown,"
