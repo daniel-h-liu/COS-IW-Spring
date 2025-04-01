@@ -6,6 +6,15 @@ from common import *
 concerts = []
 works = []
 
+def clean_doublespace(string):
+    if not isinstance(string, str):
+        return
+    return string.replace("  ", " ")
+
+def clean_conductor(conductors):
+    return conductors.split("; ")
+
+
 
 # Create lists of concerts and works
 with open("complete.json") as file:
@@ -21,10 +30,10 @@ with open("complete.json") as file:
         for work in concert["works"]:         
             w = Work(work.get("ID", "unknown_id"), 
                      concert["programID"],
-                     work.get("composerName", "Unknown,"), 
-                     work.get("workTitle", "unknown_title"),
-                     work.get("movement", ""),
-                     work.get("conductorName", "Not conducted"), 
+                     clean_doublespace(work.get("composerName", "Unknown,")), 
+                     clean_doublespace(work.get("workTitle", "Unknown")),
+                     clean_doublespace(work.get("movement", "")),
+                     clean_conductor(clean_doublespace(work.get("conductorName", "Unknown"))), 
                      work.get("soloists", []))
             works.append(w)
 
