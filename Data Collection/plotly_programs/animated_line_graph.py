@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
-from dash import Dash, dcc, html
+from dash import Dash, dcc, html, callback, Output, Input
 import common
 
 # Import necessary dataframes
@@ -45,13 +45,54 @@ def create_animation_fig(year_range = 5, top_N = 10):
     num_frames = (end_year - start_year) // year_range
     years = np.append(np.arange(start_year, end_year, step=year_range), end_year)
     fig_dict["layout"]["xaxis"] = {"range": [start_year, end_year], "title": "Year", "tickvals": years}
-    fig_dict["layout"]["yaxis"] = {"range": [0, 6000], "title": "Popularity (Times Programmed)"}
-    fig_dict["layout"]["updatemenus"]= [dict(
-            type="buttons",
-            buttons=[dict(label="Play",
-                          method="animate",
-                          args=[None])])]
-    # sliders_dict = {}
+    fig_dict["layout"]["yaxis"] = {"range": [0, 5500], "title": "Popularity (Times Programmed)"}
+    # Set up play/pause buttons
+    fig_dict["layout"]["updatemenus"]= [
+        {
+            "buttons": [
+                {
+                    "args": [None, {"frame": {"duration": 500, "redraw": False},
+                                    "fromcurrent": True, "transition": {"duration": 300,
+                                                                        "easing": "quadratic-in-out"}}],
+                    "label": "Play",
+                    "method": "animate"
+                },
+                {
+                    "args": [[None], {"frame": {"duration": 0, "redraw": False},
+                                    "mode": "immediate",
+                                    "transition": {"duration": 0}}],
+                    "label": "Pause",
+                    "method": "animate"
+                }
+            ],
+            "direction": "left",
+            "pad": {"r": 10, "t": 87},
+            "showactive": True,
+            "type": "buttons",
+            "x": 0.1,
+            "xanchor": "right",
+            "y": 0,
+            "yanchor": "top"
+        }
+    ]
+    # Slider for year
+    sliders_dict = {
+        "active": 0,
+        "yanchor": "top",
+        "xanchor": "left",
+        "currentvalue": {
+            "font": {"size": 20},
+            "prefix": "Year:",
+            "visible": True,
+            "xanchor": "right"
+        },
+        "transition": {"duration": 300, "easing": "cubic-in-out"},
+        "pad": {"b": 10, "t": 50},
+        "len": 0.9,
+        "x": 0.1,
+        "y": 0,
+        "steps": []
+    }
 
     # Make frames
     composer_freq = pd.Series(np.zeros(len(uniq_composers)), index=uniq_composers) # create composer frequency from zero
@@ -64,34 +105,50 @@ def create_animation_fig(year_range = 5, top_N = 10):
             if y in works_by_year.groups:
                 works_by_year.get_group(y)['composer'].apply(update_freq, args=(composer_trends, composer_freq, year))
     
+        # Get top_N composers
         top_composers = composer_freq.nlargest(top_N)
 
-        # Debugging check
-        #print(f"Year {year}: {top_composers}")
-
-
+        # Update line data
         frame["data"] = [go.Scatter(x=composer_trends[composer][0], 
                                     y=composer_trends[composer][1],
                                     mode='lines',
                                     name=composer)
                                     for composer in top_composers.index]
-        
-        #for composer in top_composers.index:
-        #    print(f"{composer}: {composer_trends[composer]}")
 
         fig_dict["frames"].append(frame)
 
-    #print(fig_dict)
+        # Update step association for slider
+        slider_step = {"args": [
+                [year],
+                {"frame": {"duration": 300, "redraw": False},
+                "mode": "immediate",
+                "transition": {"duration": 300}}
+            ],
+            "label": str(year),
+            "method": "animate"}
+        sliders_dict["steps"].append(slider_step)
+
+    # Update slider info
+    fig_dict["layout"]["sliders"] = [sliders_dict]
+
     return go.Figure(fig_dict)
-
-
 
 
 app = Dash()
 
-app.layout = html.Div([
-    dcc.Graph(figure=create_animation_fig())
-])
+app.layout = [
+    html.H1(children='Composer Popularity Over Time', style={'textAlign':'center'}),
+    html.Div([dcc.Graph(figure=create_animation_fig(), id='line-graph')]),
+    html.Div([html.Label("Number of Top Composers"),
+              dcc.Dropdown(options=[5,10,15,20], value=10, id='top-N-selector')]),
+]
+
+@callback(
+    Output('line-graph', 'figure'),
+    Input('top-N-selector','value')
+)
+def update_topN(value):
+    return create_animation_fig(top_N=value)
 
 
 if __name__ == '__main__':
