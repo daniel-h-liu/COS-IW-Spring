@@ -10,6 +10,8 @@ pd.options.mode.chained_assignment = None
 def normalize_title(title):
     if isinstance(title, dict):
         return title.get("em", "") + " " + title.get("_", "")
+    elif title == None:
+        return "Unknown"
     else:
         return title
     
@@ -22,7 +24,7 @@ def setup():
     # Clean works df
     works = works.query('id != "0*"') # remove all entries that are intermissions
 
-    works['n_title'] = works['title'].apply(normalize_title)
+    works['title'] = works['title'].apply(normalize_title)
 
     ## Add Date column to concerts and works
     # extract date from concert-info dictionary as new column
