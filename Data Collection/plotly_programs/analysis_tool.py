@@ -564,7 +564,8 @@ def create_work_pop_by_year_fig(year_range = 5, top_N = 10, selected_works = Non
 #----------------------------APP LAYOUT--------------------------------#
 #----------------------------------------------------------------------#
 
-app = Dash(suppress_callback_exceptions=True)
+app = Dash(__name__, suppress_callback_exceptions=True)
+server = app.server
 
 app.layout = [
     # Header
@@ -770,4 +771,4 @@ def render_tab(tab):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
