@@ -686,7 +686,8 @@ def render_tab(tab):
             5. **Export Results**  
             Download plots as pngs by clicking the camera icon in the top right corner of each graph.
                          
-            
+            App is currently hosted on render with a very limited CPU. As such, when switching tabs there may be significant delays in loading the content for the time being.
+            Render's workers will sometimes also run out of memory, causing the website to freeze. Apologies for the performance issues. 
             ''', style={'margin': '5%'}),
 
             dcc.Markdown('''
